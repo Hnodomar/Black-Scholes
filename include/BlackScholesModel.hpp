@@ -2,6 +2,9 @@
 #define BLACK_SCHOLES_MODEL_HPP
 
 #include <vector>
+#include <cmath>
+
+#include "pricingmath.hpp"
 
 class BlackScholesModel {
 public:
