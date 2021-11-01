@@ -12,6 +12,17 @@ target_include_directories(unit_tests PUBLIC
     include/
 )
 
+add_executable(visual_tests
+    ${CMAKE_CURRENT_SOURCE_DIR}/visual_tests.cpp
+    ${bs_model_src}
+)   
+target_link_libraries(visual_tests PUBLIC
+    pricingmath
+)
+target_include_directories(visual_tests PUBLIC
+    ../include
+)
+
 include(CTest)
 include(Catch)
 catch_discover_tests(unit_tests)
