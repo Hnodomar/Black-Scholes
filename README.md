@@ -2,7 +2,7 @@
 
 Price Path generated with geometric brownian motion:
 
-![Price Path](https://github.com/Hnodomar/Black-Scholes/blob/tree/master/pricepath.png?raw=true)
+![Price Path](https://github.com/Hnodomar/Black-Scholes/blob/master/description/pricepath.png?raw=true)
 
 
 ## Dependencies
