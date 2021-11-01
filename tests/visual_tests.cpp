@@ -7,15 +7,13 @@
 #include "BlackScholesModel.hpp"
 
 void generatePricePathData() {
-    const BlackScholesModel bsm(1, 100.0, 0.1, 0.05, 2.0);
-    const std::size_t num_steps = 100;
+    const BlackScholesModel bsm(0, 100.0, 0.1, 0.05, 2.0);
+    const std::size_t num_steps = 1000;
     const double maturity = 4.0;
     const std::vector<double> path(bsm.generatePricePath(maturity, num_steps));
     const double dt = (maturity - 2.0) / num_steps;
     const std::vector<double> times(PricingMath::createLinearSequence(dt, maturity, num_steps));
-    std::ofstream out("data/pricepath.dat", std::ios_base::out);
-    for (const auto& num : path)
-        std::cout << num << std::endl;
+    std::ofstream out("../../tests/pricepath.dat", std::ios_base::out);
     if (out.is_open()) {
         for (size_t i = 0; i < path.size(); ++i) {
             out << path[i] << " " << times[i] << "\n";
@@ -35,7 +33,7 @@ int main(int argc, char* argv[]) {
         return std::find(argv, argv + argc, arg) != argv + argc;
     };
     if (argExists("-PricePath")) {
-        std::cout << "Generating price path data in file data/pricepath.dat..\n";
+        std::cout << "Generating price path data in file pricepath.dat..\n";
         generatePricePathData();
         std::cout << "Generated price path data\n";
     }
