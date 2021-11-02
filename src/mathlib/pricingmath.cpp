@@ -66,13 +66,12 @@ double normInverse(const double x) {
 }
 
 std::vector<double> getNRandomNumbers(const size_t n) {
-    static std::random_device dev;
+    static std::random_device dev("default");
     static std::mt19937 rng(dev());
-    //static std::uniform_real_distribution<double> dist(-1, 1);
+    static std::uniform_real_distribution<double> dist(0, 1);
     std::vector<double> ret(n);
     for (size_t i = 0; i < n; ++i) {
-        const double rnum = (rng()+0.5)/ (rng.max()+1.0 );
-        ret[i] = normInverse(rnum);
+        ret[i] = normInverse(dist(rng));
     }
     return ret;
 }

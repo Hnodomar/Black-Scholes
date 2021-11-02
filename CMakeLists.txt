@@ -6,6 +6,12 @@ set(CMAKE_CXX_FLAGS_RELEASE "-O3")
 
 file(GLOB bs_model_src
     src/BlackScholesModel.cpp
+    src/calloption.cpp
+    src/montecarlopricer.cpp
+)
+
+file(GLOB bs_model_inc
+    include/
 )
 
 add_library(pricingmath

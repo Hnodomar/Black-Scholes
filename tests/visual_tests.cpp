@@ -7,7 +7,7 @@
 #include "BlackScholesModel.hpp"
 
 void generatePricePathData() {
-    const BlackScholesModel bsm(0, 100.0, 0.1, 0.05, 2.0);
+    const OptionPricing::BlackScholesModel bsm(0, 100.0, 0.1, 0.05, 2.0);
     const std::size_t num_steps = 1000;
     const double maturity = 4.0;
     const std::vector<double> path(bsm.generatePricePath(maturity, num_steps));

@@ -1,5 +1,6 @@
 #include "BlackScholesModel.hpp"
-#include <iostream>
+
+using namespace OptionPricing;
 
 BlackScholesModel::BlackScholesModel(const double drift, const double stock_price, const double volatility, const double risk_free_rate, const double date) 
     : drift_(drift)

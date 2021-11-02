@@ -5,7 +5,7 @@
 #include <cmath>
 
 #include "pricingmath.hpp"
-
+namespace OptionPricing {
 class BlackScholesModel {
 public:
     BlackScholesModel(
@@ -17,6 +17,10 @@ public:
     );
     std::vector<double> generatePricePath(const double to_date, const int num_steps) const;
     std::vector<double> generateRiskNeutralPricePath(const double to_date, const int num_steps) const;
+    double getStockPrice() const {return stock_price_;}
+    double getVolatility() const {return volatility_;}
+    double getRiskFreeRate() const {return risk_free_rate_;}
+    double getDate() const {return date_;}
 private:
     const double drift_;
     const double stock_price_;
@@ -29,5 +33,5 @@ private:
         const double drift
     ) const;
 };
-
+}
 #endif

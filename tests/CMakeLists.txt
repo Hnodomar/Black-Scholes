@@ -2,6 +2,7 @@ find_package(Catch2 REQUIRED)
 
 add_executable(unit_tests
     ${CMAKE_CURRENT_SOURCE_DIR}/unit_tests.cpp
+    ${bs_model_src}
 )
 target_link_libraries(unit_tests
     Catch2::Catch2
@@ -9,7 +10,7 @@ target_link_libraries(unit_tests
 )
 target_include_directories(unit_tests PUBLIC
     include/mathlib
-    include/
+    ../include
 )
 
 add_executable(visual_tests
