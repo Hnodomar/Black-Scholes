@@ -11,6 +11,7 @@ target_link_libraries(unit_tests
 target_include_directories(unit_tests PUBLIC
     include/mathlib
     ../include
+    ../include/options
 )
 
 add_executable(visual_tests
@@ -22,6 +23,7 @@ target_link_libraries(visual_tests PUBLIC
 )
 target_include_directories(visual_tests PUBLIC
     ../include
+    ../include/options
 )
 
 include(CTest)

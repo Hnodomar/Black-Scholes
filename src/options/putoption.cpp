@@ -22,3 +22,7 @@ double PutOption::price(const BlackScholesModel& bsm) const {
 double PutOption::getMaturity() const {
     return maturity_;
 }
+
+double PutOption::payoff(const double price_at_maturity) const {
+    return price_at_maturity < strike_ ? strike_ - price_at_maturity : 0.0;
+}
