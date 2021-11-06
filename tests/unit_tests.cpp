@@ -5,6 +5,7 @@
 
 #include "pricingmath.hpp"
 #include "calloption.hpp"
+#include "putoption.hpp"
 #include "BlackScholesModel.hpp"
 #include "montecarlopricer.hpp"
 
@@ -46,6 +47,12 @@ TEST_CASE("Option Pricing") {
         const CallOption call(105.0, 2.0);
         const BlackScholesModel bsm(0.0, 100.0, 0.1, 0.05, 1.0);
         REQUIRE(call.price(bsm) == Approx(4.046).margin(1e-2));
+    }
+    SECTION("Put Option Price") {
+        const PutOption put(105.0, 2.0);
+        const BlackScholesModel bsm(0.0, 100.0, 0.1, 0.05, 1.0);
+        const double price = put.price(bsm);
+        REQUIRE(price == Approx(3.925).margin(1e-2));
     }
     SECTION("Monte Carlo Price") {
         const CallOption call(110.0, 2.0);
