@@ -9,6 +9,7 @@ file(GLOB bs_model_src
     "src/options/calloption.cpp"
     "src/options/putoption.cpp"
     "src/pricing/montecarlopricer.cpp"
+    "src/options/continuoustimeoption.cpp"
 )
 
 file(GLOB bs_model_inc

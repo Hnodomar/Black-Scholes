@@ -5,18 +5,15 @@
 
 #include "pricingmath.hpp"
 #include "BlackScholesModel.hpp"
-#include "pathindependentoption.hpp"
+#include "continuoustimeoption.hpp"
 
 namespace OptionPricing {
-class CallOption : public PathIndependentOption {
+class CallOption : public ContinuousTimeOption {
 public:
-    CallOption(const double strike, const double maturity);
+    CallOption(const double maturity, const double strike);
     double payoff(const double price_at_maturity) const override;
     double price(const BlackScholesModel& bsm) const; // https://en.wikipedia.org/wiki/Black%E2%80%93Scholes_model
-    double getMaturity() const override {return maturity_;}
-private:
-    const double strike_;
-    const double maturity_;
+    bool isPathDependent() const override {return false;}
 };
 }
 

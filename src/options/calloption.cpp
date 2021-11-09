@@ -2,8 +2,8 @@
 
 using namespace OptionPricing;
 
-CallOption::CallOption(const double strike, const double maturity)
-    : strike_(strike), maturity_(maturity)
+CallOption::CallOption(const double maturity, const double strike)
+    : ContinuousTimeOption(maturity, strike)
 {}
 
 double CallOption::payoff(const double price_at_maturity) const {

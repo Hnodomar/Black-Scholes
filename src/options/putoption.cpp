@@ -2,8 +2,8 @@
 
 using namespace OptionPricing;
 
-PutOption::PutOption(const double strike, const double maturity)
-    : strike_(strike), maturity_(maturity)
+PutOption::PutOption(const double maturity, const double strike)
+    : ContinuousTimeOption(maturity, strike)
 {}
 
 double PutOption::price(const BlackScholesModel& bsm) const {
@@ -19,10 +19,6 @@ double PutOption::price(const BlackScholesModel& bsm) const {
     return -S * PricingMath::normCDF(-d1) + exp(-r * T) * K * PricingMath::normCDF(-d2);
 }
 
-double PutOption::getMaturity() const {
-    return maturity_;
-}
-
 double PutOption::payoff(const double price_at_maturity) const {
-    return price_at_maturity < strike_ ? strike_ - price_at_maturity : 0.0;
+    return std::max(strike_ - price_at_maturity, 0.0);
 }

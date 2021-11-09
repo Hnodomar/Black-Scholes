@@ -2,18 +2,15 @@
 #define PUT_OPTION_HPP
 
 #include "BlackScholesModel.hpp"
-#include "pathindependentoption.hpp"
+#include "continuoustimeoption.hpp"
 
 namespace OptionPricing {
-class PutOption : public PathIndependentOption {
+class PutOption : public ContinuousTimeOption {
 public:
-    PutOption(const double strike, const double maturity);
+    PutOption(const double maturity, const double strike);
     double payoff(const double price_at_maturity) const override;
     double price(const BlackScholesModel& bsm) const;
-    double getMaturity() const override;
-private:
-    const double strike_;
-    const double maturity_;
+    bool isPathDependent() const override {return false;}
 };
 }
 
