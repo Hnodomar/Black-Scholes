@@ -10,8 +10,8 @@ target_link_libraries(unit_tests
 )
 target_include_directories(unit_tests PUBLIC
     include/mathlib
-    ../include
     ../include/options
+    ../include/pricing
 )
 
 add_executable(visual_tests
@@ -22,8 +22,8 @@ target_link_libraries(visual_tests PUBLIC
     pricingmath
 )
 target_include_directories(visual_tests PUBLIC
-    ../include
     ../include/options
+    ../include/pricing
 )
 
 include(CTest)

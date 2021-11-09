@@ -5,15 +5,15 @@ set(CMAKE_CXX_FLAGS "-std=c++17 -Wall -march=native -O3")
 set(CMAKE_CXX_FLAGS_RELEASE "-O3")
 
 file(GLOB bs_model_src
-    "src/BlackScholesModel.cpp"
+    "src/pricing/BlackScholesModel.cpp"
     "src/options/calloption.cpp"
     "src/options/putoption.cpp"
-    "src/montecarlopricer.cpp"
+    "src/pricing/montecarlopricer.cpp"
 )
 
 file(GLOB bs_model_inc
-    "include/"
     "include/options/"
+    "include/pricing/"
 )
 
 add_library(pricingmath
