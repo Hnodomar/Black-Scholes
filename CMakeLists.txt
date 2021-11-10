@@ -4,25 +4,34 @@ project(BlackScholesPricing)
 set(CMAKE_CXX_FLAGS "-std=c++17 -Wall -march=native -O3")
 set(CMAKE_CXX_FLAGS_RELEASE "-O3")
 
-file(GLOB bs_model_src
-    "src/pricing/BlackScholesModel.cpp"
-    "src/options/calloption.cpp"
-    "src/options/putoption.cpp"
-    "src/pricing/montecarlopricer.cpp"
-    "src/options/continuoustimeoption.cpp"
+set(src_dir "${CMAKE_SOURCE_DIR}/src")
+set(inc_dir "${CMAKE_SOURCE_DIR}/include")
+
+file(GLOB bs_model_src CONFIGURE_DEPENDS
+    "${src_dir}/pricing/*.cpp"
+    "${src_dir}/options/*.cpp"
 )
 
-file(GLOB bs_model_inc
-    "include/options/"
-    "include/pricing/"
+file(GLOB bs_model_inc CONFIGURE_DEPENDS
+    "${inc_dir}/options"
+    "${inc_dir}/pricing"
+)
+
+add_library(optionspricing
+    ${bs_model_src}
+)
+
+target_include_directories(optionspricing PUBLIC
+    ${bs_model_inc}
+    ${inc_dir}/mathlib
 )
 
 add_library(pricingmath
-    "src/mathlib/pricingmath.cpp"
+    "${src_dir}/mathlib/pricingmath.cpp"
 )
 
 target_include_directories(pricingmath PUBLIC
-    include/mathlib
+    ${inc_dir}/mathlib
 )
 
 enable_testing()

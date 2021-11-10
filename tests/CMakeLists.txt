@@ -2,28 +2,25 @@ find_package(Catch2 REQUIRED)
 
 add_executable(unit_tests
     ${CMAKE_CURRENT_SOURCE_DIR}/unit_tests.cpp
-    ${bs_model_src}
 )
 target_link_libraries(unit_tests
     Catch2::Catch2
     pricingmath
+    optionspricing
 )
 target_include_directories(unit_tests PUBLIC
-    include/mathlib
-    ../include/options
-    ../include/pricing
+    ${bs_model_inc}
 )
 
 add_executable(visual_tests
     ${CMAKE_CURRENT_SOURCE_DIR}/visual_tests.cpp
-    ${bs_model_src}
 )   
 target_link_libraries(visual_tests PUBLIC
     pricingmath
+    optionspricing
 )
 target_include_directories(visual_tests PUBLIC
-    ../include/options
-    ../include/pricing
+    ${bs_model_inc}
 )
 
 include(CTest)

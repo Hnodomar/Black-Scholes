@@ -8,6 +8,7 @@
 #include "putoption.hpp"
 #include "BlackScholesModel.hpp"
 #include "montecarlopricer.hpp"
+#include "portfolio.hpp"
 
 TEST_CASE("PricingMath Functionality") {
     using namespace PricingMath;
@@ -61,5 +62,32 @@ TEST_CASE("Option Pricing") {
         const double price = mcp.price(call, bsm);
         const double expected = call.price(bsm);
         REQUIRE(price == Approx(expected).margin(1e-1));
+    }
+}
+
+TEST_CASE("Portfolio Functionality") {
+    using namespace OptionPricing;
+    using PPtr = std::shared_ptr<Portfolio>;
+    using CallPtr = std::shared_ptr<CallOption>;
+    using PutPtr = std::shared_ptr<PutOption>;
+    SECTION("Single Security") {
+        PPtr portfolio(Portfolio::getInstance());
+        CallPtr call(std::make_shared<CallOption>(1.0, 110));
+        portfolio->add(call, 100);
+        const BlackScholesModel bsm(0, 100, 0.1, 0, 0);
+        const double unit_price = call->price(bsm);
+        const double portfolio_price = portfolio->price(bsm);
+        REQUIRE(100.0 * unit_price == Approx(portfolio_price).margin(1e-4));
+    }
+    SECTION("Put Call Parity") {
+        PPtr portfolio(Portfolio::getInstance());
+        CallPtr call(std::make_shared<CallOption>(1.0, 110));
+        PutPtr put(std::make_shared<PutOption>(1.0, 110));
+        portfolio->add(call, 100);
+        portfolio->add(put, -100);
+        BlackScholesModel bsm(0, 100, 0.1, 0, 0);
+        const double expected = bsm.getStockPrice() - call->getStrike();
+        const double portfolio_price = portfolio->price(bsm);
+        REQUIRE(100.0 * expected == Approx(portfolio_price).margin(1e-4));
     }
 }
