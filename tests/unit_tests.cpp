@@ -9,6 +9,7 @@
 #include "BlackScholesModel.hpp"
 #include "montecarlopricer.hpp"
 #include "portfolio.hpp"
+#include "hedgingsim.hpp"
 
 TEST_CASE("PricingMath Functionality") {
     using namespace PricingMath;
@@ -89,5 +90,26 @@ TEST_CASE("Portfolio Functionality") {
         const double expected = bsm.getStockPrice() - call->getStrike();
         const double portfolio_price = portfolio->price(bsm);
         REQUIRE(100.0 * expected == Approx(portfolio_price).margin(1e-4));
+    }
+}
+
+TEST_CASE("Delta Hedging") {
+    using namespace OptionPricing;
+    SECTION("Mean Payoff") {
+        const std::shared_ptr<BlackScholesModel> bsm(
+            std::make_shared<BlackScholesModel>(
+                0.1, 1, 0.2, 0.05, 0
+            )
+        );
+        HedgingSimulator hedge_sim(
+            std::make_shared<CallOption>(
+                1, 1
+            ),
+            bsm,
+            bsm,
+            1000
+        );
+        const std::vector<double> result(hedge_sim.runSimulations(1));
+        REQUIRE(result[0] == Approx(0.0).margin(1e-2));
     }
 }
