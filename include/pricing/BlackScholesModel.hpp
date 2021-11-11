@@ -11,7 +11,7 @@ public:
     BlackScholesModel(
         const double drift, 
         const double stock_price, 
-        const double volatiltiy, 
+        const double volatility, 
         const double risk_free_rate, 
         const double date
     );
@@ -21,6 +21,7 @@ public:
     double getVolatility() const {return volatility_;}
     double getRiskFreeRate() const {return risk_free_rate_;}
     double getDate() const {return date_;}
+    double getDrift() const {return drift_;}
 private:
     const double drift_;
     const double stock_price_;

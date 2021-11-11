@@ -10,11 +10,13 @@ set(inc_dir "${CMAKE_SOURCE_DIR}/include")
 file(GLOB bs_model_src CONFIGURE_DEPENDS
     "${src_dir}/pricing/*.cpp"
     "${src_dir}/options/*.cpp"
+    "${src_dir}/hedging/*.cpp"
 )
 
 file(GLOB bs_model_inc CONFIGURE_DEPENDS
     "${inc_dir}/options"
     "${inc_dir}/pricing"
+    "${inc_dir}/hedging"
 )
 
 add_library(optionspricing

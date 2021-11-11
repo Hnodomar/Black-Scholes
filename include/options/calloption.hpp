@@ -12,6 +12,7 @@ class CallOption : public ContinuousTimeOption {
 public:
     CallOption(const double maturity, const double strike);
     double payoff(const double price_at_maturity) const override;
+    double delta(const BlackScholesModel& bsm) const;
     double price(const BlackScholesModel& bsm) const; // https://en.wikipedia.org/wiki/Black%E2%80%93Scholes_model
     bool isPathDependent() const override {return false;}
 };
