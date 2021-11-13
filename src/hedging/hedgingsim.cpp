@@ -58,3 +58,14 @@ double HedgingSimulator::selectStockQuantity(const double date, const double sto
     );
     return to_hedge_->delta(std::move(pm));
 }
+
+double HedgingSimulator::chooseCharge(const double stock_price) const {
+    const BlackScholesModel pm(
+        pricing_model_->getDrift(),
+        stock_price, 
+        pricing_model_->getVolatility(),
+        pricing_model_->getRiskFreeRate(),
+        pricing_model_->getDate()
+    );
+    return to_hedge_->price(pm);
+}

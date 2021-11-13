@@ -93,18 +93,18 @@ TEST_CASE("Portfolio Functionality") {
     }
 }
 
+// Theoretically, if trader follows delta hedging strat in continuous time
+// and if stock price follows Black-Scholes model, then profit and loss of
+// trader will be exactly zero
+
 TEST_CASE("Delta Hedging") {
     using namespace OptionPricing;
     SECTION("Mean Payoff") {
         const std::shared_ptr<BlackScholesModel> bsm(
-            std::make_shared<BlackScholesModel>(
-                0.1, 1, 0.2, 0.05, 0
-            )
+            std::make_shared<BlackScholesModel>(0.1, 1, 0.2, 0.05, 0)
         );
         HedgingSimulator hedge_sim(
-            std::make_shared<CallOption>(
-                1, 1
-            ),
+            std::make_shared<CallOption>(1, 1),
             bsm,
             bsm,
             1000
