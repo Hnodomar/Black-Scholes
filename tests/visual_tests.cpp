@@ -46,7 +46,7 @@ void generateHistogramData() {
             0.1, 1, 0.2, 0.05, 0
         )
     );
-    OptionPricing::HedgingSimulator hedge_sim(
+    const OptionPricing::HedgingSimulator hedge_sim(
         std::make_shared<OptionPricing::CallOption>(1, 1),
         bsm,
         bsm,
